@@ -31,3 +31,40 @@ Input: s = "LVIII"
 Output: 58
 Explanation: L = 50, V= 5, III = 3.
 */
+
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+int romanToInt(string s) {
+        unordered_map<char,int> ump ;
+        ump['I'] = 1;
+        ump['V'] = 5;
+        ump['X'] = 10;
+        ump['L'] = 50;
+        ump['C'] = 100;
+        ump['D'] = 500;
+        ump['M'] = 1000;
+        char curr, nex ;
+        int n = s.length();
+        int sum=0;
+        for(int i=0;i<n-1;i++){
+            curr = s[i];
+            nex = s[i+1];
+            if(ump[curr] >= ump[nex]){
+                sum = sum + ump[curr];
+            }else{
+                sum = sum - ump[curr];
+            }
+        }
+        curr = s[n-1];
+        sum = sum + ump[curr];
+        return sum;
+    }
+
+int main(){
+    string s;
+    cin>>s;
+    cout<<romanToInt(s);
+    return 0;
+}
